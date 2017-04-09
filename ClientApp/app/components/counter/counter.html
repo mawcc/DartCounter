@@ -1,0 +1,59 @@
+<template>
+    <h1>Dart Counter</h1>
+
+    <div class="row">
+        <form class="form-horizontal">
+            <div class="form-group">
+                <label for="gameType" class="col-md-2 control-label">
+                    Game type:
+                </label>
+                <div class="col-md-5">
+                    <select value.bind="selectedGameTypeId" class="form-control">
+                        <option repeat.for="gt of gameTypes" model.bind="gt.id">
+                            ${gt.name}
+                        </option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="gameType" class="col-md-2 control-label">
+                    Number of players:
+                </label>
+                <div class="col-md-5">
+                    <input type="text" value.bind="numberOfPlayers" class="form-control" />
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <button click.delegate="startGame()" class="btn btn-default">OK</button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <div if.bind="isGameRunning" style="margin-top: 20px">
+        <div class="col-md-6">
+            <div style="margin-bottom: 5px">
+                <button click.delegate="logScore(25)" class="btn btn-default">BULL</button>
+                <button click.delegate="logScore(25 * 2)" class="btn btn-default">x2</button>
+            </div>
+            <div style="margin-bottom: 5px" repeat.for="s of scores">
+                <button click.delegate="logScore(s)" class="btn btn-default">${s}</button>
+                <button click.delegate="logScore(s * 2)" class="btn btn-default">x2</button>
+                <button click.delegate="logScore(s * 3)" class="btn btn-default">x3</button>
+            </div>
+        </div>
+        <div class="col-md-6">
+
+        </div>
+    </div>
+
+    <div if.bind="isGameRunning" style="margin-top: 20px">
+        <ul class="list-group">
+            <li repeat.for="p of players" class="list-group-item">
+                <span class="badge">${p.score}</span>
+                ${p.name}
+            </li>
+        </ul>
+    </div>
+</template>
